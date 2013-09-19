@@ -8,7 +8,7 @@ service API
 ### Setup:
  - Create an `s3.json` file with the following settings:
 
-    ```
+    ```json
      {
      "s3Key": "<your-s3-key>",
      "s3Secret": "<your-s3-secret>",
