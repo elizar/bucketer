@@ -2,10 +2,12 @@ var http = require('http'),
     util = require('util'),
     crypto = require('crypto'),
     d = new Date(),
+    x2j = require('xml2json'),
+    pj = require('prettyjson'),
     config = require('./s3.json'),
     options = {
       hostname: config.bucket + '.s3.amazonaws.com',
-      path: '/css/main.css',
+      path: '/',
       headers: {
         'X-Amz-Date': d.toUTCString(),
         'Authorization': ' AWS ' + config.s3Key + ':' + getSignature()
@@ -19,7 +21,7 @@ function getSignature() {
     '',
     '',
     'x-amz-date:' + d.toUTCString(),
-    '/' + config.bucket + '/css/main.css'
+    '/' + config.bucket + '/'
   ].join('\n');
   console.log(sig);
   return crypto.createHmac('sha1', config.s3Secret).update(new Buffer(sig, 'utf8')).digest('base64');
@@ -27,9 +29,14 @@ function getSignature() {
 }
 
 var req = http.request(options, function(res) {
+  var xml = '';
   res.setEncoding('utf8');
   res.on('data', function(chunk) {
-    console.log('BODY: \n' + chunk);
+    xml += chunk;
+    //console.log('BODY: \n' + chunk);
+  });
+  res.on('end', function() {
+    console.log(pj.render(x2j.toJson(xml, {object:true})));
   });
 });
 

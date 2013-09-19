@@ -1,0 +1,27 @@
+{
+  "name": "bucketer",
+  "version": "0.0.0",
+  "description": "test script for amason's s3 web service api",
+  "main": "s3.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/elizar/bucketer.git"
+  },
+  "keywords": [
+    "s3",
+    "amazon",
+    "bucket"
+  ],
+  "author": "Elizar Pepino",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elizar/bucketer/issues"
+  },
+  "dependencies": {
+    "xml2json": "~0.3.2",
+    "prettyjson": "~0.8.1"
+  }
+}
