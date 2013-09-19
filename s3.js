@@ -23,7 +23,6 @@ function getSignature() {
     'x-amz-date:' + d.toUTCString(),
     '/' + config.bucket + '/'
   ].join('\n');
-  console.log(sig);
   return crypto.createHmac('sha1', config.s3Secret).update(new Buffer(sig, 'utf8')).digest('base64');
 
 }
